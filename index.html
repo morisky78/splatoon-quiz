@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Splatoon Quiz</title>
+    <link rel="stylesheet" href="assets/css/reset.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+    <div class="quiz-outline-box">
+    <header>
+        <h1>Splatoon Quiz</h1>
+        <!-- <a id="home-btn" href="index.html"><img src="assets/images/test.png"></a> -->
+        <a id="home-btn" href="index.html">Home</a> 
+        <button id="score-btn">View High Scores</button>
+    </header>
+    <main>
+        <section id="home">
+            <img src="assets/images/mainSample.jpg" />
+            <button id="start-btn">Start!</button>
+        </section>
+
+        <section id="game-stage">
+            <span id="time-left"></span>
+            <img id="q-img" />
+            <p id="q-question"></p>
+            <ol id="q-choices"></ol>
+        </section>
+
+        <section id="gameover">
+            <h2 id="game-over-msg"></h2>
+            <h3>You scored <span id="point">0</span> points!</h3>
+            <p>Please enter your name:</p>
+            <form>
+                <lable>Initials: </lable>
+                <input id="gamer-name" type="text" placeholder="" maxlength="12"/>
+                <input type="submit" value="Submit" id="initSubmit"/>
+            </form>
+            
+        </section>
+
+        <section id="scorebox">
+            <h2>High Scores</h2>
+            <div id="score-list"></div>
+            <button id="reset">Reset High Scores</button>
+            <button id="play-again">Play Again!</button>
+        </section>
+
+    </main>
+    <footer>
+        <p>Created by Mo Risk</p>
+    </footer>
+    </div>
+    <script src="quizSet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
