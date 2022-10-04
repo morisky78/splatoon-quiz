@@ -1,5 +1,12 @@
+:root {
+    --white: #fff;
+    --dark-blue: #13293d;
+    --tan: #d8a47f;
+    /* You can use it with any value that is repeated throughout the sheet */
+}
+
 body{
-    background-image: url('../images/background.png');
+    background-image: url('../images/background.jpg');
     background-size: cover;
     background-position: center;
     
@@ -54,6 +61,7 @@ main {
     min-height: 200px;
 }
 #game-stage p{
+    font-family: 'Fredoka One', cursive;
     font-size:1.8em;
     padding:10px 0;
 }
@@ -62,11 +70,15 @@ main {
     flex-wrap: wrap;
     justify-content:space-between;}
 #game-stage li{
+    position:relative;
     width:49%;
-    font-size:1.2em;
+    font-size:1.4em;
     padding:20px;
     background:rgb(183, 183, 183);
-    margin-bottom:5px;
+    margin-bottom:7px;
+    border-radius: 10px;
+    border:3px solid #000;
+    font-family: 'Fredoka One', cursive;
 }
 #game-stage li:hover{
     cursor: pointer;
@@ -83,6 +95,26 @@ main {
 #game-stage li.a3:hover{
     background-color:#00c9b5;
 } */
+#game-stage li span{
+    position:absolute;
+    text-align:center;
+    padding-top:50px;
+    top:-35px;
+    right:5px;
+    padding-right:4px;
+    width:140px;height:158px;
+    font-size:20px;
+    color:white;
+    background-image:url(../images/paint/drop2.png);
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+}
+#game-stage li span.ans-wrong{
+    background-image:url(../images/paint/drop3.png);
+    color:black;
+}
+
 #gameover{display:none;}
 
 #scorebox{display:none;}

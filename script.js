@@ -22,7 +22,7 @@ var scoreListDiv = document.querySelector("#score-list");
 
 var numOfQuestions = 10;
 var curQ = 0;
-var gameTime = 100;
+var gameTime = 200;
 
 var isPlaying = false;
 var timer;
@@ -49,9 +49,9 @@ function displayQuestion(i) {
 
     qChoicesEl.textContent = '';
 
-    console.log(quizSet[i].choices);
+    // show choices in random order
     shuffleArray(quizSet[i].choices);
-    console.log(quizSet[i].choices);
+
     for (let x = 0; x < quizSet[i].choices.length; x++) {
         
         var aChoice = document.createElement("li");
@@ -59,6 +59,8 @@ function displayQuestion(i) {
         aChoice.textContent = quizSet[i].choices[x];
         qChoicesEl.appendChild(aChoice);
     }
+
+    qChoicesEl.addEventListener("click", choiceClicked );
 
 }
 
@@ -138,26 +140,43 @@ function gameOver(){
 
 }
 function choiceClicked(event) {
+    
     var clickedEl = event.target;
     if ( !clickedEl.matches("li")) return;
 
+    console.log(clickedEl.textContent+" clicked!");
+
+    // after a choice is clicked, user can't click another answer until new question shows up
+    qChoicesEl.removeEventListener("click", choiceClicked );
+
+    var correctMsg;
+    var correctSpan = document.createElement("span");
+
     if ( quizSet[curQ].answer == clickedEl.textContent ) {
         // alert("correct");
+        correctMsg = 'correct';
+        correctSpan.setAttribute("class", "ans-right");
         numCorrect++;
     } else{
         // alert("wrong");
         // when wrong answered, time is subtracted 
+        correctMsg = 'wrong';
+        correctSpan.setAttribute("class", "ans-wrong");
         timeLeft -= 10;
     }
+    correctSpan.textContent  = correctMsg;
+    clickedEl.appendChild(correctSpan);
 
     curQ++;
-    if (curQ === numOfQuestions) {
-        gameOver();
-    } else {
-        displayQuestion(curQ);
-    }
-
-
+    // show result and give 3 seconds before move to next one
+    var delayToShowAnswer = setTimeout (function(){
+        if (curQ === numOfQuestions) {
+            gameOver();
+        } else {
+            displayQuestion(curQ);
+        }
+    }, 2000);
+        
 }
 
 var startGame = function() {
@@ -179,7 +198,7 @@ var startGame = function() {
 
     homeBtn.style.display='block';
 
-    console.log("how many questions? " + numOfQuestions)
+    // console.log("how many questions? " + numOfQuestions)
 
     displayQuestion(curQ);
 
@@ -194,7 +213,7 @@ var startGame = function() {
 
     }, 1000);
 
-    qChoicesEl.addEventListener("click", choiceClicked );
+    
 }
 
 startBtn.addEventListener("click", startGame );
@@ -224,8 +243,8 @@ initSubmitBtn.addEventListener("click", function(event) {
     scoreArr.push(newRecord);
   
     var newRecordStr = JSON.stringify(scoreArr);
-    console.log("this will be inserted:");
-    console.log(newRecordStr);
+
+    // console.log(newRecordStr);
 
     localStorage.setItem("HighScoreArray",newRecordStr);
 
