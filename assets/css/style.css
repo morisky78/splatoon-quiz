@@ -14,12 +14,27 @@ body{
     /* height:100vh; */
     align-items: center;
     justify-content: center;
+    font-family: 'Fredoka', sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Fredoka One', cursive;
+}
+
+button{
+    padding:5px 10px;
+    font-size: 14px;
+    border-radius: 5px;
 }
 
 .quiz-outline-box{
-    width:80%;
+    width:90%;
     margin:0 auto;
-    max-width: 800px;
+    max-width: 960px;
     background:#fff;
     padding:20px;
 
@@ -47,7 +62,6 @@ main {
     padding:30px 0;
 }
 #home{text-align: center;}
-#home-btn img{width:100px}
 
 #home img{width:100%;}
 #game-stage {
@@ -59,7 +73,6 @@ main {
 #time-left {
     position:absolute;
     font-size:22px;
-    font-family: 'Fredoka One', cursive;
     border:3px solid black;
     border-radius: 100px;
     background:white;
@@ -70,6 +83,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'Fredoka One', cursive;
 }
 #time-left.deducted{
     border:5px solid red;
@@ -90,7 +104,6 @@ main {
     min-height: 200px;
 }
 #game-stage p{
-    font-family: 'Fredoka One', cursive;
     font-size:1.8em;
     padding:10px 0;
 }
@@ -107,7 +120,6 @@ main {
     margin-bottom:7px;
     border-radius: 10px;
     border:3px solid #000;
-    font-family: 'Fredoka One', cursive;
 }
 #game-stage li:hover{
     cursor: pointer;
@@ -143,20 +155,90 @@ main {
     background-image:url(../images/paint/drop3.png);
     color:black;
 }
-#gameover{display:none;}
+#gameover{display:none;
+background:url(../images/paint.gif) 20% 50% no-repeat;}
 
-#scorebox{display:none;}
+#gameover .flexbox{
+    display:flex;
+    justify-content: space-around;
+}
+#game-over-img{width:40%;}
+#gameover .contents{width:50%;}
+#game-over-msg {
+    padding-top:10px;
+    font-size:2.3em;
+    font-weight:normal;
+    margin-bottom:15px;}
+#gameover h3{
+    font-size:1.8em;
+    margin-bottom:30px;
+}
+#gameover form p,#gameover label,#gameover input{
+    line-height:200%;font-size:1.2em;}
+#gameover #gamer-name{width:130px;height:40px;}
+#gameover #initSubmit{padding:0 20px;height:40px;}
+
+#scorebox{
+    display:none;
+    min-height:300px
+}
+#scorebox h2{
+    font-size:1.8em;
+    text-align: center;
+    margin:0 0 10px;
+
+}
+#scorebox .buttons{display:flex;justify-content: center;}
+
+#score-list{margin-bottom:30px;}
 #score-list table{width:80%;margin:0 auto;}
-#score-list th{background-color: bisque;}
+#score-list tr:nth-child(odd) {
+    background-color: gainsboro ;
+}
+#score-list th{
+    background-color: bisque;
+    padding:7px 10px;
+    font-size:1.2em;
+    border-radius: 5px;
+}
+.nodata{text-align: center;padding:30px;}
+.nodata img{width:50%;display:block;margin:0 auto;}
+
+#score-list td{
+    padding:5px 10px;
+    text-align:center;
+    font-size:1.1em;
+}
+#score-list td.ini{
+    text-align:left;
+}
+
+/* Small smartphones - image placeholders change color */
+@media screen and (max-width: 768px) {
+    .quiz-outline-box{
+        width:95%;
+        padding:10px;
+    }
+
+    #gameover .flexbox{
+       flex-direction: column;
+       align-items: center;
+    }
+    #game-over-img{width:50%;}
+    #gameover .contents{width:90%;}
+
+}
 
 /* Small smartphones - image placeholders change color */
 @media screen and (max-width: 576px) {
-    .quiz-outline-box{
-        width:95%;
-    }
+
     #game-stage li{
         width:100%;
     }   
+    
+    #game-stage img{
+        height:30vh;
+    }
 
     
 }

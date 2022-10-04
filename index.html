@@ -5,7 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Splatoon Quiz</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Fredoka:wght@500&family=Peralta&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/reset.css" />
     <link rel="stylesheet" href="assets/css/style.css" />
 </head>
@@ -31,22 +33,28 @@
         </section>
 
         <section id="gameover">
-            <h2 id="game-over-msg"></h2>
-            <h3>You scored <span id="point">0</span> points!</h3>
-            <p>Please enter your name:</p>
-            <form>
-                <lable>Initials: </lable>
-                <input id="gamer-name" type="text" placeholder="" maxlength="12"/>
-                <input type="submit" value="Submit" id="initSubmit"/>
-            </form>
-            
+            <div class="flexbox">
+                <img id="game-over-img" src="assets/images/congrats.png" alt="Inkling fighting turf-war"/>
+                <div class="contents">
+                    <h2 id="game-over-msg"></h2>
+                    <h3>You scored <span id="point"></span> </h3>
+                    <form>
+                        <p>Enter your initials to save your score!</p>
+                        <label>Initials: </label>
+                        <input id="gamer-name" type="text" placeholder="" maxlength="12"/>
+                        <button id="initSubmit">Submit</button>
+                    </form>
+                </div>
+            </div>
         </section>
 
         <section id="scorebox">
             <h2>High Scores</h2>
             <div id="score-list"></div>
-            <button id="reset">Reset High Scores</button>
-            <button id="play-again">Play Again!</button>
+            <div class="buttons">
+                <button id="reset">Reset High Scores</button>
+                <button id="play-again">Play Again!</button>
+            </div>
         </section>
 
     </main>

@@ -19,10 +19,11 @@ var gameOverMsgEl = document.querySelector("#game-over-msg");
 var pointSpan = document.querySelector("#point");
 var nameInput = document.querySelector("#gamer-name");
 var scoreListDiv = document.querySelector("#score-list");
+var gameOverImg = document.querySelector("#game-over-img");
 
-var numOfQuestions = 10;
+var numOfQuestions = 4;
 var curQ = 0;
-var gameTime = 200;
+var gameTime = 20;
 
 var isPlaying = false;
 var timer;
@@ -45,7 +46,7 @@ function displayQuestion(i) {
     console.log(quizSet[i]);
 
     qImgEl.setAttribute("src", quizSet[i].imgsrc);
-    qQuestionEl.innerHTML = "<strong>Q<span>"+(curQ+1)+"</span></strong> "+quizSet[i].q;
+    qQuestionEl.innerHTML = "<strong>[<span>Q"+(curQ+1)+"</span>/"+numOfQuestions+"]</strong> "+quizSet[i].q;
 
     qChoicesEl.textContent = '';
 
@@ -69,17 +70,24 @@ function showScores() {
     gameStageSection.style.display="none";
     gameOverSection.style.display = "none";
     scoreSection.style.display="block";
-    scoreListDiv.innerHTML = '';
+    homeBtn.style.display='block';
 
     var scoreRecordStr = localStorage.getItem("HighScoreArray") ;
-    var scoreArr = [];
-    if (scoreRecordStr) {
-        scoreArr = JSON.parse(scoreRecordStr) ;
+    // cleardata
+    scoreListDiv.innerHTML = '';
+    
+    // if there is no stored data, do not excute below. show the defualt message
+    if ( !scoreRecordStr ) {
+        scoreListDiv.innerHTML = '<p class="nodata"><img src="assets/images/purplepainting.jpg" alt="Just painting"/>No data yet!</p>';
+        return;
     } 
+
+    var scoreArr = scoreArr = JSON.parse(scoreRecordStr) ;
 
     scoreArr.sort((a,b) => b.point - a.point);
 
     var listTable = document.createElement("table");
+    // table header 
     var listTr = document.createElement("tr");
     var listTh_name = document.createElement("th");
     listTh_name.textContent = 'Name';
@@ -90,7 +98,7 @@ function showScores() {
     listTr.appendChild(listTh_correct);
 
     var listTh_point = document.createElement("th");
-    listTh_point.textContent = 'Point';
+    listTh_point.textContent = 'Scores';
     listTr.appendChild(listTh_point);
 
     listTable.appendChild(listTr);
@@ -102,6 +110,7 @@ function showScores() {
         var listTr = document.createElement("tr");
         var listTd_name = document.createElement("td");
         listTd_name.textContent = scoreArr[i].name;
+        listTd_name.setAttribute("class", "ini");
         listTr.appendChild(listTd_name);
 
         var listTd_correct = document.createElement("td");
@@ -130,12 +139,23 @@ function gameOver(){
     gameOverSection.style.display = "block";
     pointSpan.textContent = timeLeft;
     nameInput.value="";
+
     if (timeLeft > 0){
-        gameOverMsgEl.textContent = "Congrats!"
+        gameOverMsgEl.textContent = "Congrats!";
     } else{
-        gameOverMsgEl.textContent = "Game Over! Too bad..."
+        gameOverMsgEl.textContent = "Time's up! Too bad..."
+        gameOverImg.setAttribute("src", "assets/images/timeover.png");
     }
-    pointSpan.textContent = timeLeft;
+    
+    // Gaveover-Your scroe message: You scored x points! /  0 point.
+    var scoreStr = timeLeft + ' point';
+    if (timeLeft > 1) {
+        scoreStr += 's!';
+    }  else {
+        scoreStr += '.';
+    }
+    pointSpan.textContent = scoreStr;
+    
 
 }
 function choiceClicked(event) {
@@ -208,7 +228,7 @@ var startGame = function() {
         timeLeft--;
         timeLeftSpan.textContent = timeLeft;
 
-        if (timeLeft == 0){
+        if (timeLeft <= 0){
             clearInterval(timer);
             gameOver();
         }
