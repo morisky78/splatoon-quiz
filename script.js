@@ -155,14 +155,14 @@ function choiceClicked(event) {
         
         clickedEl.setAttribute("class", "clicked-right");
         correctMsg = 'correct';
-        correctSpan.setAttribute("class", "ans-right");
+
         numCorrect++;
     } else{
         // alert("wrong");
         // when wrong answered, time is subtracted 
         clickedEl.setAttribute("class", "clicked-wrong");
         correctMsg = 'wrong';
-        correctSpan.setAttribute("class", "ans-wrong");
+        timeLeftSpan.setAttribute("class", "deducted")
         timeLeft -= 10;
     }
     correctSpan.textContent  = correctMsg;
@@ -174,6 +174,7 @@ function choiceClicked(event) {
         if (curQ === numOfQuestions) {
             gameOver();
         } else {
+            timeLeftSpan.setAttribute("class", "")
             displayQuestion(curQ);
         }
     }, 2000);
