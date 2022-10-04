@@ -55,7 +55,6 @@ function displayQuestion(i) {
     for (let x = 0; x < quizSet[i].choices.length; x++) {
         
         var aChoice = document.createElement("li");
-        aChoice.setAttribute("class", "a"+x);
         aChoice.textContent = quizSet[i].choices[x];
         qChoicesEl.appendChild(aChoice);
     }
@@ -153,13 +152,15 @@ function choiceClicked(event) {
     var correctSpan = document.createElement("span");
 
     if ( quizSet[curQ].answer == clickedEl.textContent ) {
-        // alert("correct");
+        
+        clickedEl.setAttribute("class", "clicked-right");
         correctMsg = 'correct';
         correctSpan.setAttribute("class", "ans-right");
         numCorrect++;
     } else{
         // alert("wrong");
         // when wrong answered, time is subtracted 
+        clickedEl.setAttribute("class", "clicked-wrong");
         correctMsg = 'wrong';
         correctSpan.setAttribute("class", "ans-wrong");
         timeLeft -= 10;

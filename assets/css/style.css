@@ -11,7 +11,7 @@ body{
     background-position: center;
     
     display: flex;
-    height:100vh;
+    /* height:100vh; */
     align-items: center;
     justify-content: center;
 }
@@ -82,19 +82,10 @@ main {
 }
 #game-stage li:hover{
     cursor: pointer;
-}
-/* #game-stage li.a0:hover{
-    background-color:#fa2e97;
-}
-#game-stage li.a1:hover{
     background-color:#abdd00;
 }
-#game-stage li.a2:hover{
-    background-color:#c900dd;
-}
-#game-stage li.a3:hover{
-    background-color:#00c9b5;
-} */
+
+
 #game-stage li span{
     position:absolute;
     text-align:center;
@@ -105,18 +96,39 @@ main {
     width:140px;height:158px;
     font-size:20px;
     color:white;
-    background-image:url(../images/paint/drop2.png);
+    
     background-size: cover;
     background-position: center;
     z-index: 1;
 }
-#game-stage li span.ans-wrong{
+#game-stage li.clicked-right{
+    background-color:#556dd8;
+}
+#game-stage li.clicked-wrong{
+    background-color:#f97789;
+}
+#game-stage li.clicked-right span{
+    background-image:url(../images/paint/drop2.png);
+}
+#game-stage li.clicked-wrong span{
     background-image:url(../images/paint/drop3.png);
     color:black;
 }
-
 #gameover{display:none;}
 
 #scorebox{display:none;}
 #score-list table{width:80%;margin:0 auto;}
 #score-list th{background-color: bisque;}
+
+/* Small smartphones - image placeholders change color */
+@media screen and (max-width: 576px) {
+    .quiz-outline-box{
+        width:95%;
+    }
+    #game-stage li{
+        width:100%;
+    }   
+
+    
+}
+  
