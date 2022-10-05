@@ -25,6 +25,10 @@ https://github.com/morisky78/splatoon-quiz/
 - Users can delete the recode by clicking 'Reset High Scores'
 
 
+### Screenshots from different states
+<img src="./assets/images/screenshot1.jpg" height="220" alt="Home page"><img src="./assets/images/screenshot2.jpg" height="220" alt="Playing quiz game - correct answer"><img src="./assets/images/screenshot3.jpg" height="220" alt="Playing quiz game - wrong answer"><img src="./assets/images/screenshot4.jpg" height="220" alt="Game over - times up"><img src="./assets/images/screenshot5.jpg" height="220" alt="High scores">  
+
+
 
 ### Responsive user interface
 The screenshots of the page are attached below to show the layout difference in 3 different screen sizes.    

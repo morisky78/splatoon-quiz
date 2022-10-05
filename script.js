@@ -148,6 +148,7 @@ function gameOver(){
     // when game is over becuase time ran out, show different msg, and image
     if (timeLeft > 0){
         gameOverMsgEl.textContent = "Congrats!";
+        gameOverImg.setAttribute("src", "assets/images/congrats.png");
     } else{
         gameOverMsgEl.textContent = "Time's up! Too bad..."
         gameOverImg.setAttribute("src", "assets/images/timeover.png");
