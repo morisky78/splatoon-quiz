@@ -1,8 +1,5 @@
 :root {
-    --white: #fff;
-    --dark-blue: #13293d;
-    --tan: #d8a47f;
-    /* You can use it with any value that is repeated throughout the sheet */
+    --mainColor: pink;
 }
 
 body{
@@ -16,20 +13,11 @@ body{
     justify-content: center;
     font-family: 'Fredoka', sans-serif;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1,h2,h3,h4,h5,h6 {
     font-family: 'Fredoka One', cursive;
 }
 
-button{
-    padding:5px 10px;
-    font-size: 14px;
-    border-radius: 5px;
-}
+header h1{font-size:2em;line-height: 140%;}
 
 .quiz-outline-box{
     width:90%;
@@ -40,21 +28,22 @@ button{
 
     border:5px solid #000;
     border-radius: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8)
+    box-shadow: 0 0 14px rgba(0, 0, 0, 0.8)
 }
 
 header {
-    background:pink;
+    background:var(--mainColor);
     display:flex;
     align-items: center;
     justify-content: space-between;
     padding:20px;
     font-size:1.2em;
 }
-#home-btn{display:none;}
+header nav{display:flex;align-items: center;}
+header nav button{margin-left:3px;margin-right:3px;}
 
 footer{
-    background:pink;
+    background:var(--mainColor);
     text-align: center;padding:10px 0;
     font-size:0.83em;
 }
@@ -62,6 +51,30 @@ main {
     padding:30px 0;
 }
 #home{text-align: center;}
+button{
+    padding:6px 10px;
+    font-size: 15px;
+    border-radius: 5px;
+    margin:0 10px;
+}
+button:hover{
+    cursor:pointer;
+}
+#home-btn{
+    display:none;
+
+}
+#start-btn {    
+    font-family: 'Fredoka One', cursive;
+    font-size:20px;
+    border:4px solid black;
+    width:100px;height:100px;border-radius: 100px;
+    margin-top:-50px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
+}
+#start-btn:hover {    
+    box-shadow: 0 0 15px rgba(207, 2, 2, 0.7);
+}
 
 #home img{width:100%;}
 #game-stage {
@@ -72,14 +85,14 @@ main {
 
 #time-left {
     position:absolute;
-    font-size:22px;
+    font-size:25px;
     border:3px solid black;
     border-radius: 100px;
     background:white;
-    width:60px;
-    height:60px;
+    width:80px;
+    height:80px;
     top:-20px;
-    right:5px;
+    right:8px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -89,10 +102,10 @@ main {
     border:5px solid red;
     color:red;
     background-color:pink;
-    width:64px;
-    height:64px;
+    width:86px;
+    height:86px;
     top:-22px;
-    right:3px;
+    right:5px;
     transition: border 1s, color 1s, background-color 1s;
 }
 #game-stage img{
@@ -175,8 +188,8 @@ background:url(../images/paint.gif) 20% 50% no-repeat;}
 }
 #gameover form p,#gameover label,#gameover input{
     line-height:200%;font-size:1.2em;}
-#gameover #gamer-name{width:130px;height:40px;}
-#gameover #initSubmit{padding:0 20px;height:40px;}
+#gameover #gamer-name{width:110px;height:40px;}
+
 
 #scorebox{
     display:none;
@@ -219,6 +232,7 @@ background:url(../images/paint.gif) 20% 50% no-repeat;}
         width:95%;
         padding:10px;
     }
+    header h1{font-size:1.5em;}
 
     #gameover .flexbox{
        flex-direction: column;
@@ -231,15 +245,17 @@ background:url(../images/paint.gif) 20% 50% no-repeat;}
 
 /* Small smartphones - image placeholders change color */
 @media screen and (max-width: 576px) {
-
+    header{padding:10px;}
+    header h1{font-size:1.3em;}
     #game-stage li{
         width:100%;
     }   
     
     #game-stage img{
-        height:30vh;
+        height:25vh;
     }
-
-    
+    button{
+        padding:6px 4px;
+    }
 }
   

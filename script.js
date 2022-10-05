@@ -1,3 +1,4 @@
+//buttons
 var startBtn = document.querySelector("#start-btn");
 var homeBtn = document.querySelector("#home-btn");
 var initSubmitBtn = document.querySelector("#initSubmit");
@@ -5,15 +6,18 @@ var playAgainBtn = document.querySelector("#play-again");
 var ScoreBtn = document.querySelector("#score-btn")
 var resetBtn = document.querySelector("#reset")
 
+// main area sections (home / gamestage / gameover/ scoreboard)
 var homeSection = document.querySelector("#home");
 var gameStageSection = document.querySelector("#game-stage");
 var gameOverSection = document.querySelector("#gameover");
 var scoreSection = document.querySelector("#scorebox");
 
+// quiz part
 var qImgEl = document.querySelector("#q-img");
 var qQuestionEl = document.querySelector("#q-question");
 var qChoicesEl = document.querySelector("#q-choices");
 
+// etc. elements
 var timeLeftSpan = document.querySelector("#time-left");
 var gameOverMsgEl = document.querySelector("#game-over-msg");
 var pointSpan = document.querySelector("#point");
@@ -21,16 +25,18 @@ var nameInput = document.querySelector("#gamer-name");
 var scoreListDiv = document.querySelector("#score-list");
 var gameOverImg = document.querySelector("#game-over-img");
 
-var numOfQuestions = 4;
 var curQ = 0;
-var gameTime = 20;
+var numOfQuestions = quizSet.length;
+// total game time in second
+var gameTime = 100;
+// delay after a choice is clicked. (in millisecond)
+var delaySec = 1000;
 
-var isPlaying = false;
 var timer;
 var timeLeft;
 var numCorrect;
 
-/* Randomize array in-place using Durstenfeld shuffle algorithm */
+// Randomize array in-place using Durstenfeld shuffle algorithm (link on README)
 function shuffleArray(array) {
     for (var i = array.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
@@ -40,7 +46,8 @@ function shuffleArray(array) {
     }
 }
 
-
+// Print out a Quiz set (image, question, choices) 
+// and add event listerner on choices
 function displayQuestion(i) {
     console.log("display question #"+i);
     console.log(quizSet[i]);
@@ -54,7 +61,6 @@ function displayQuestion(i) {
     shuffleArray(quizSet[i].choices);
 
     for (let x = 0; x < quizSet[i].choices.length; x++) {
-        
         var aChoice = document.createElement("li");
         aChoice.textContent = quizSet[i].choices[x];
         qChoicesEl.appendChild(aChoice);
@@ -64,7 +70,9 @@ function displayQuestion(i) {
 
 }
 
+// Print out scores from local storage
 function showScores() {
+    // clear timer, and hide all other main section.
     clearInterval(timer);
     homeSection.style.display="none";
     gameStageSection.style.display="none";
@@ -87,23 +95,22 @@ function showScores() {
     scoreArr.sort((a,b) => b.point - a.point);
 
     var listTable = document.createElement("table");
-    // table header 
+   
+    // create a table and table header 
     var listTr = document.createElement("tr");
     var listTh_name = document.createElement("th");
     listTh_name.textContent = 'Name';
     listTr.appendChild(listTh_name);
-
     var listTh_correct = document.createElement("th");
     listTh_correct.textContent = 'Correct #';
     listTr.appendChild(listTh_correct);
-
     var listTh_point = document.createElement("th");
     listTh_point.textContent = 'Scores';
     listTr.appendChild(listTh_point);
-
     listTable.appendChild(listTr);
     scoreListDiv.appendChild(listTable); 
 
+    // print each data
     for (let i = 0; i < scoreArr.length; i++) {
         console.log(scoreArr[i].name);   
 
@@ -125,21 +132,20 @@ function showScores() {
         scoreListDiv.appendChild(listTable); 
         
     }
-    
-    
-
-
-
 
 }
+
+
 function gameOver(){
     console.log("Game Over!");
+    // clear timer, and hide other main sections
     clearInterval(timer);
     gameStageSection.style.display = 'none';
     gameOverSection.style.display = "block";
     pointSpan.textContent = timeLeft;
     nameInput.value="";
 
+    // when game is over becuase time ran out, show different msg, and image
     if (timeLeft > 0){
         gameOverMsgEl.textContent = "Congrats!";
     } else{
@@ -155,9 +161,9 @@ function gameOver(){
         scoreStr += '.';
     }
     pointSpan.textContent = scoreStr;
-    
-
 }
+
+
 function choiceClicked(event) {
     
     var clickedEl = event.target;
@@ -168,9 +174,11 @@ function choiceClicked(event) {
     // after a choice is clicked, user can't click another answer until new question shows up
     qChoicesEl.removeEventListener("click", choiceClicked );
 
+    // an element created in choice <LI> to show correct / wrong msg
     var correctMsg;
     var correctSpan = document.createElement("span");
 
+    // correct answer
     if ( quizSet[curQ].answer == clickedEl.textContent ) {
         
         clickedEl.setAttribute("class", "clicked-right");
@@ -189,6 +197,7 @@ function choiceClicked(event) {
     clickedEl.appendChild(correctSpan);
 
     curQ++;
+    
     // show result and give 3 seconds before move to next one
     var delayToShowAnswer = setTimeout (function(){
         if (curQ === numOfQuestions) {
@@ -197,7 +206,7 @@ function choiceClicked(event) {
             timeLeftSpan.setAttribute("class", "")
             displayQuestion(curQ);
         }
-    }, 2000);
+    }, delaySec);
         
 }
 
@@ -207,27 +216,30 @@ var startGame = function() {
     //initialize
     clearInterval(timer);
     timeLeftSpan.textContent = gameTime;
-
+    // set the class to defualt in case it has 'deducted' class from last game
+    timeLeftSpan.setAttribute("class",'');
     
-    isPlaying = true;
     curQ = 0;
     numCorrect = 0;
     timeLeft = gameTime;
 
+    // hide other main sections
     homeSection.style.display='none';
     gameStageSection.style.display='block';
     scoreSection.style.display="none";
 
     homeBtn.style.display='block';
 
-    // console.log("how many questions? " + numOfQuestions)
-
+    // display the first question
     displayQuestion(curQ);
 
+    // count down every second
     timer = setInterval(function () {
         timeLeft--;
         timeLeftSpan.textContent = timeLeft;
 
+        // time counted down to zero or below 
+        // (negative cases: when -10s deducted from wrong answer)
         if (timeLeft <= 0){
             clearInterval(timer);
             gameOver();
@@ -238,6 +250,8 @@ var startGame = function() {
     
 }
 
+
+// buttns with addEventListers!
 startBtn.addEventListener("click", startGame );
 playAgainBtn.addEventListener("click", startGame);
 ScoreBtn.addEventListener("click", showScores);
@@ -247,10 +261,12 @@ resetBtn.addEventListener("click", function() {
     showScores();
 })
 
+// when initial inserted
 initSubmitBtn.addEventListener("click", function(event) {
     event.preventDefault();
     var gamerName = nameInput.value.trim();
     
+    // get the localstorage data, and parse into original array
     var oldRecordStr = localStorage.getItem("HighScoreArray")
     var scoreArr = [];
     if (oldRecordStr) {
@@ -261,16 +277,21 @@ initSubmitBtn.addEventListener("click", function(event) {
         point: timeLeft,
         correct: numCorrect
     }
-
+    // and insert new record to the array 
     scoreArr.push(newRecord);
   
     var newRecordStr = JSON.stringify(scoreArr);
 
+    // insert to the local storage with combined stingified array
     // console.log(newRecordStr);
-
     localStorage.setItem("HighScoreArray",newRecordStr);
 
     showScores();
 
 
 });
+
+// home btn - refresh the page
+homeBtn.addEventListener("click", function(){
+    location.href = "index.html";
+})
