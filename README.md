@@ -25,11 +25,10 @@ https://github.com/morisky78/splatoon-quiz/
 - Users can delete the recode by clicking 'Reset High Scores'
 
 
+
 ### Responsive user interface
-The screenshots of the page are attached below to show the layout difference in 3 different screen sizes.
-<img src="./assets/images/screencapture-splatoon-quiz-L.png" height="430" alt="Screenshot of my profile page in large screen size">
-<img src="./assets/images/screencapture-splatoon-quiz-M.png" height="430" alt="Screenshot of my profile page in medium screen size">
-<img src="./assets/images/screencapture-splatoon-quiz-S.jpg" height="430" alt="Screenshot of my profile page in mobile screen">
+The screenshots of the page are attached below to show the layout difference in 3 different screen sizes.    
+<img src="./assets/images/screencapture-splatoon-quiz-L.png" height="430" alt="Screenshot of my profile page in large screen size"><img src="./assets/images/screencapture-splatoon-quiz-M.png" height="430" alt="Screenshot of my profile page in medium screen size"><img src="./assets/images/screencapture-splatoon-quiz-S.jpg" height="430" alt="Screenshot of my profile page in mobile screen">
 
 
 
@@ -47,7 +46,7 @@ var quizSet = [
 ]
 ```
 
-- Update the play time and delay time: script.js
+- Update the play time and delay time: script.js  
 The total play time and the delay time (the delay time before displaying next question after user clicks an answer) can be modified by changing the values below on script.js file. Current total time: 100 sec. / delay time: 1 sec.
 
 ```javascript
