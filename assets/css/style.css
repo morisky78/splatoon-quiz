@@ -1,5 +1,6 @@
 :root {
     --mainColor: pink;
+    --gray :rgb(183, 183, 183);
 }
 
 body{
@@ -129,7 +130,7 @@ button:hover{
     width:49%;
     font-size:1.4em;
     padding:20px;
-    background:rgb(183, 183, 183);
+    background:var(--gray);
     margin-bottom:7px;
     border-radius: 10px;
     border:3px solid #000;
@@ -259,5 +260,6 @@ background:url(../images/paint.gif) 20% 50% no-repeat;}
     }
     #game-stage p {font-size:1.5em}
     #game-stage li {padding:17px 20px;}
+    #game-stage li:hover{background-color: var(--gray);}
 }
   
