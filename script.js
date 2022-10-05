@@ -197,7 +197,7 @@ function choiceClicked(event) {
     clickedEl.appendChild(correctSpan);
 
     curQ++;
-    
+
     // show result and give 3 seconds before move to next one
     var delayToShowAnswer = setTimeout (function(){
         if (curQ === numOfQuestions) {
@@ -239,8 +239,9 @@ var startGame = function() {
         timeLeftSpan.textContent = timeLeft;
 
         // time counted down to zero or below 
-        // (negative cases: when -10s deducted from wrong answer)
+        // (negative cases: when -10s deducted from wrong answer) -> set to 0
         if (timeLeft <= 0){
+            if ( timeLeft < 0 ) timeLeft = 0;
             clearInterval(timer);
             gameOver();
         }
