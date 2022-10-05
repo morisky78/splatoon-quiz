@@ -261,5 +261,12 @@ background:url(../images/paint.gif) 20% 50% no-repeat;}
     #game-stage p {font-size:1.5em}
     #game-stage li {padding:17px 20px;}
     #game-stage li:hover{background-color: var(--gray);}
+
+    #game-stage li.clicked-right:hover{
+        background-color:#556dd8;
+    }
+    #game-stage li.clicked-wrong:hover{
+        background-color:#fd92ab;
+    }
 }
   
